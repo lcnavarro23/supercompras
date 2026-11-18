@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperCompras</title>
+	
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#2e7d32">
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        h1 {
+			text-align: center;
+			color: #2e7d32;
+			margin-bottom: 20px;
+		}
+
+        .formulario {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        #nome {
+			flex: 1;
+			height: 40px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 0 8px;
+			font-size: 16px;
+		}
+
+		#preco {
+			width: 70px;
+			height: 40px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 0 8px;
+			font-size: 16px;
+		}
+
+		#quantidade {
+			width: 50px;
+			height: 40px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 0 8px;
+			font-size: 16px;
+		}
+
+        button {
+            cursor: pointer;
+        }
+
+		.formulario button {
+			background: #2e7d32;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			padding: 0 12px;
+			font-weight: bold;
+		}
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 12px;
+			margin-top: 8px;
+			background: #f5f5f5;
+			border-radius: 8px;
+			border: none;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+		}
+
+        .produto-info {
+            flex: 1;
+        }
+		.comprado {
+			text-decoration: line-through;
+			color: gray;
+			opacity: 0.7;
+		}
+
+        .controle-quantidade {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+		
+		.qtd-display {
+			width: 20px;
+			text-align: center;
+			display: inline-block;
+			font-weight: bold;
+		}
+
+        .btn-qtd {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn-mais {
+            background: green;
+            color: white;
+        }
+
+        .btn-menos {
+            background: orange;
+        }
+		.btn-comprado {
+			background: #2196f3;
+			color: white;
+			border: none;
+			padding: 6px 10px;
+			border-radius: 4px;
+		}
+		
+		.btn-editar {
+			background: #ff9800;
+			color: white;
+			border: none;
+			width: 30px;
+			height: 30px;
+			padding: 0;
+			border-radius: 4px;
+			font-size: 14px;
+		}
+
+		
+        .btn-excluir {
+            background: red;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+		.btn-limpar {
+			background: #d32f2f;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			border-radius: 5px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.btn-limpar:hover {
+			background: #b71c1c;
+		}
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+		
+		.rodape-lista {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 20px;
+		}
+
+		.total {
+			margin: 0;
+			text-align: right;
+		}
+		@media (max-width: 480px) {
+
+			body {
+				padding: 8px;
+			}
+
+			.formulario {
+				flex-wrap: wrap;
+			}
+
+			#nome {
+				width: 100%;
+			}
+
+			#preco,
+			#quantidade {
+				flex: 1;
+			}
+
+		}
+    </style>
+
+</head>
+
+<body>
+
+    <h1>🛒 SuperCompras</h1>
+
+    <div class="formulario">
+
+        <input
+            type="text"
+            id="nome"
+            placeholder="Produto">
+
+        <input
+			type="text"
+			id="preco"
+			placeholder="R$">
+
+        <input
+            type="number"
+            id="quantidade"
+            value="1"
+            min="1">
+
+        <button onclick="adicionarProduto()">
+            Adicionar
+        </button>
+
+    </div>
+
+    <ul id="listaProdutos"></ul>
+	
+	    <div class="rodape-lista">
+
+			<button
+				class="btn-limpar"
+				onclick="limparLista()">
+				🗑 Limpar Lista
+			</button>
+
+			<h2 class="total">
+				Total: R$
+				<span id="total">0,00</span>
+			</h2>
+
+		</div>
+
+    <script>
+
+        let produtos =
+            JSON.parse(localStorage.getItem('produtos')) || [];
+
+        atualizarLista();
+
+        function salvarProdutos() {
+            localStorage.setItem(
+                'produtos',
+                JSON.stringify(produtos)
+            );
+        }
+
+        function adicionarProduto() {
+
+            let nome =
+                document.getElementById("nome").value.trim();
+
+            let precoTexto =
+				document.getElementById("preco")
+				.value
+				.trim()
+				.replace(",", ".");
+
+			let preco =
+				parseFloat(precoTexto);
+
+            let quantidade =
+                parseInt(
+                    document.getElementById("quantidade").value
+                );
+
+            if (
+                nome === "" ||
+                isNaN(preco) ||
+                isNaN(quantidade)
+            ) {
+
+                alert("Preencha todos os campos.");
+
+                return;
+            }
+
+            produtos.push({
+			nome,
+			preco,
+			quantidade,
+			comprado: false
+			});
+
+            salvarProdutos();
+            atualizarLista();
+
+            document.getElementById("nome").value = "";
+            document.getElementById("preco").value = "";
+            document.getElementById("quantidade").value = 1;
+        }
+
+		function editarProduto(indice) {
+
+			let novoNome = prompt(
+				"Editar produto:",
+				produtos[indice].nome
+			);
+
+			if (
+				novoNome === null ||
+				novoNome.trim() === ""
+			) {
+				return;
+			}
+
+			let novoPreco = prompt(
+				"Editar preço:",
+				produtos[indice].preco
+			)
+			?.replace(",", ".");
+
+			if (
+				novoPreco === null ||
+				isNaN(parseFloat(novoPreco))
+			) {
+				return;
+			}
+
+			produtos[indice].nome =
+				novoNome.trim();
+
+			produtos[indice].preco =
+				parseFloat(
+					novoPreco.replace(",", ".")
+				);
+
+			salvarProdutos();
+			atualizarLista();
+		}
+
+        function excluirProduto(indice) {
+
+            produtos.splice(indice, 1);
+
+            salvarProdutos();
+            atualizarLista();
+        }
+		function limparLista() {
+
+			if (
+				!confirm(
+					"Tem certeza que deseja apagar toda a lista?"
+				)
+		) {
+				return;
+			}
+
+			produtos = [];
+
+			salvarProdutos();
+			atualizarLista();
+}
+		function alternarComprado(indice) {
+
+			produtos[indice].comprado =
+				!produtos[indice].comprado;
+
+			salvarProdutos();
+			atualizarLista();
+		}
+
+        function aumentarQuantidade(indice) {
+
+            produtos[indice].quantidade++;
+
+            salvarProdutos();
+            atualizarLista();
+        }
+
+        function diminuirQuantidade(indice) {
+
+            if (produtos[indice].quantidade > 1) {
+
+                produtos[indice].quantidade--;
+
+                salvarProdutos();
+                atualizarLista();
+            }
+        }
+
+        function atualizarLista() {
+
+            produtos.sort((a, b) => {
+
+				if (a.comprado !== b.comprado) {
+					return a.comprado ? 1 : -1;
+				}
+
+				return a.nome.localeCompare(
+					b.nome,
+					'pt-BR'
+				);
+
+			});
+
+            let lista =
+                document.getElementById("listaProdutos");
+
+            lista.innerHTML = "";
+
+            let total = 0;
+
+            produtos.forEach((produto, indice) => {
+
+                let subtotal =
+                    produto.preco *
+                    produto.quantidade;
+
+                total += subtotal;
+
+                let item =
+                    document.createElement("li");
+
+                item.innerHTML = `
+					<span class="produto-info">
+						<strong class="${produto.comprado ? 'comprado' : ''}">
+							${produto.nome}
+						</strong><br>
+
+						R$ ${produto.preco.toFixed(2).replace(".", ",")}
+						×
+						${produto.quantidade}
+						=
+						<strong>
+							R$ ${subtotal.toFixed(2).replace(".", ",")}
+						</strong>
+					</span>
+
+                    <div class="controle-quantidade">
+
+						<input
+							type="checkbox"
+							${produto.comprado ? "checked" : ""}
+							onclick="alternarComprado(${indice})">
+
+						<button
+							class="btn-qtd btn-menos"
+							onclick="diminuirQuantidade(${indice})">
+							-
+						</button>
+
+						<span class="qtd-display">
+							${produto.quantidade}
+						</span>
+
+						<button
+							class="btn-qtd btn-mais"
+							onclick="aumentarQuantidade(${indice})">
+							+
+						</button>
+
+						<button
+							class="btn-editar"
+							onclick="editarProduto(${indice})">
+							✏️
+						</button>
+
+						<button
+							class="btn-excluir"
+							onclick="excluirProduto(${indice})">
+							Excluir
+						</button>
+
+					</div>
+			`;
+
+                lista.appendChild(item);
+				});
+
+				document.getElementById("total").textContent =
+					total.toFixed(2).replace(".", ",");
+
+				}
+
+				document.addEventListener("DOMContentLoaded", () => {
+
+					if ("serviceWorker" in navigator) {
+						navigator.serviceWorker.register("sw.js")
+							.then(() => {
+								console.log("Service Worker registrado.");
+							})
+							.catch((erro) => {
+								console.log("Erro ao registrar SW:", erro);
+							});
+					}
+
+				});
+
+    </script>
+
+</body>
+
+</html>

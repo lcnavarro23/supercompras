@@ -1,4 +1,4 @@
-const CACHE_NAME = "supercompras-v1";
+const CACHE_NAME = "supercompras-v2";
 
 const arquivos = [
     "index.html",

@@ -244,6 +244,10 @@
 <body>
 
     <h1>🛒 SuperCompras</h1>
+	
+	<div id="nomeListaAtual">
+		📋 Lista Atual: Nenhuma
+	</div>
 
     <div class="formulario">
 
@@ -451,6 +455,12 @@
 				"nomeListaAtual"
 			).textContent =
 				"📋 Lista Atual: " + nomeLista;
+
+			document.getElementById(
+				"nomeListaAtual"
+			).textContent =
+				"📋 Lista Atual: " +
+				nomeLista;
 
 			alert(
 				'Lista "' +

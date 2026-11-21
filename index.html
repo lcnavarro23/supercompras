@@ -258,18 +258,24 @@
 	
 	    <div class="rodape-lista">
 
-			<button
-				class="btn-limpar"
-				onclick="limparLista()">
-				🗑 Limpar Lista
-			</button>
+		<button
+			class="btn-exportar"
+			onclick="exportarLista()">
+			📤
+		</button>
 
-			<h2 class="total">
-				Total: R$
-				<span id="total">0,00</span>
-			</h2>
+		<button
+			class="btn-limpar"
+			onclick="limparLista()">
+			🗑
+		</button>
 
-		</div>
+		<h2 class="total">
+			Total: R$
+			<span id="total">0,00</span>
+		</h2>
+
+	</div>
 
     <script>
 
@@ -382,11 +388,16 @@
             salvarProdutos();
             atualizarLista();
         }
+		
+			function exportarLista() {
+				alert("Botão Exportar funcionando!");
+			}
+		
 		function limparLista() {
 
 			if (
 				!confirm(
-					"Tem certeza que deseja apagar toda a lista?"
+					"Tem certeza?"
 				)
 		) {
 				return;

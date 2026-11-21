@@ -440,12 +440,17 @@
 					localStorage.getItem("listasSalvas")
 				) || {};
 
-			listasSalvas[nomeLista] = produtos;
+			listasSalvas[nomeLista] =
+				JSON.parse(JSON.stringify(produtos));
 
 			localStorage.setItem(
 				"listasSalvas",
 				JSON.stringify(listasSalvas)
 			);
+			document.getElementById(
+				"nomeListaAtual"
+			).textContent =
+				"📋 Lista Atual: " + nomeLista;
 
 			alert(
 				'Lista "' +
@@ -503,6 +508,11 @@
 
 			produtos =
 				listasSalvas[nomeLista];
+
+			alert(
+				"Itens encontrados: " +
+				produtos.length
+			);
 
 			document.getElementById(
 				"nomeListaAtual"

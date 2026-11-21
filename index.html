@@ -456,9 +456,39 @@
 
 		function abrirLista() {
 
-			let nomeLista = prompt(
-				"Digite o nome da lista que deseja abrir:"
-			);
+			let listasSalvas =
+				JSON.parse(
+					localStorage.getItem("listasSalvas")
+				) || {};
+
+			let nomesListas =
+				Object.keys(listasSalvas);
+
+			if (nomesListas.length === 0) {
+
+				alert("Nenhuma lista salva.");
+
+				return;
+			}
+
+			let mensagem =
+				"Listas disponíveis:\n\n";
+
+			nomesListas.forEach((nome, indice) => {
+
+				mensagem +=
+					(indice + 1) +
+					" - " +
+					nome +
+					"\n";
+
+			});
+
+			mensagem +=
+				"\nDigite o nome da lista que deseja abrir:";
+
+			let nomeLista =
+				prompt(mensagem);
 
 			if (
 				nomeLista === null ||
@@ -466,11 +496,6 @@
 			) {
 				return;
 			}
-
-			let listasSalvas =
-				JSON.parse(
-					localStorage.getItem("listasSalvas")
-				) || {};
 
 			if (!listasSalvas[nomeLista]) {
 

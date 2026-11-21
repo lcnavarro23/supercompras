@@ -230,9 +230,11 @@
             placeholder="Produto">
 
         <input
-			type="text"
+			type="number"
 			id="preco"
-			placeholder="R$">
+			placeholder="R$"
+			step="0.01"
+			min="0">
 
         <input
             type="number"
@@ -318,8 +320,10 @@
             atualizarLista();
 
             document.getElementById("nome").value = "";
-            document.getElementById("preco").value = "";
-            document.getElementById("quantidade").value = 1;
+			document.getElementById("preco").value = "";
+			document.getElementById("quantidade").value = 1;
+
+			document.getElementById("nome").focus();
         }
 
 		function editarProduto(indice) {

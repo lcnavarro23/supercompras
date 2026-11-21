@@ -485,30 +485,30 @@
 			});
 
 			mensagem +=
-				"\nDigite o nome da lista que deseja abrir:";
+				"\nDigite o número da lista:";
 
-			let nomeLista =
-				prompt(mensagem);
+			let opcao =
+				parseInt(prompt(mensagem));
 
 			if (
-				nomeLista === null ||
-				nomeLista.trim() === ""
+				isNaN(opcao) ||
+				opcao < 1 ||
+				opcao > nomesListas.length
 			) {
 				return;
 			}
 
-			if (!listasSalvas[nomeLista]) {
+			let nomeLista =
+				nomesListas[opcao - 1];
 
-				alert(
-					'A lista "' +
-					nomeLista +
-					'" não foi encontrada.'
-				);
+			produtos =
+				listasSalvas[nomeLista];
 
-				return;
-			}
-
-			produtos = listasSalvas[nomeLista];
+			document.getElementById(
+				"nomeListaAtual"
+			).textContent =
+				"📋 Lista Atual: " +
+				nomeLista;
 
 			salvarProdutos();
 

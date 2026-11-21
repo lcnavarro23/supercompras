@@ -423,7 +423,35 @@
         }
 		
 		function salvarLista() {
-			alert("Salvar Lista em desenvolvimento");
+
+			let nomeLista = prompt(
+				"Digite o nome da lista:"
+			);
+
+			if (
+				nomeLista === null ||
+				nomeLista.trim() === ""
+			) {
+				return;
+			}
+
+			let listasSalvas =
+				JSON.parse(
+					localStorage.getItem("listasSalvas")
+				) || {};
+
+			listasSalvas[nomeLista] = produtos;
+
+			localStorage.setItem(
+				"listasSalvas",
+				JSON.stringify(listasSalvas)
+			);
+
+			alert(
+				'Lista "' +
+				nomeLista +
+				'" salva com sucesso!'
+			);
 		}
 
 		function abrirLista() {

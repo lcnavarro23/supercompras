@@ -175,18 +175,20 @@
 			font-weight: bold;
 		}
 		
-		.exportacao {
+		.acoes-lista {
+			display: flex;
+			gap: 5px;
 			margin-top: 10px;
 		}
 
-		.btn-exportar {
-			width: 100%;
+		.btn-acao-lista {
+			flex: 1;
 			height: 40px;
 			background: #1976d2;
 			color: white;
 			border: none;
 			border-radius: 5px;
-			font-size: 16px;
+			font-size: 14px;
 			font-weight: bold;
 		}
 
@@ -286,12 +288,24 @@
 
 	</div>
 
-	<div class="exportacao">
+	<div class="acoes-lista">
 
 		<button
-			class="btn-exportar"
+			class="btn-acao-lista"
+			onclick="salvarLista()">
+			💾 Salvar
+		</button>
+
+		<button
+			class="btn-acao-lista"
+			onclick="abrirLista()">
+			📂 Abrir
+		</button>
+
+		<button
+			class="btn-acao-lista"
 			onclick="exportarLista()">
-			📤 Exportar Lista
+			📤 Exportar
 		</button>
 
 	</div>
@@ -408,9 +422,17 @@
             atualizarLista();
         }
 		
-			function exportarLista() {
-				alert("Botão Exportar funcionando!");
-			}
+		function salvarLista() {
+			alert("Salvar Lista em desenvolvimento");
+		}
+
+		function abrirLista() {
+			alert("Abrir Lista em desenvolvimento");
+		}
+		
+		function exportarLista() {
+			alert("Botão Exportar funcionando!");
+		}
 		
 		function limparLista() {
 

@@ -455,7 +455,45 @@
 		}
 
 		function abrirLista() {
-			alert("Abrir Lista em desenvolvimento");
+
+			let nomeLista = prompt(
+				"Digite o nome da lista que deseja abrir:"
+			);
+
+			if (
+				nomeLista === null ||
+				nomeLista.trim() === ""
+			) {
+				return;
+			}
+
+			let listasSalvas =
+				JSON.parse(
+					localStorage.getItem("listasSalvas")
+				) || {};
+
+			if (!listasSalvas[nomeLista]) {
+
+				alert(
+					'A lista "' +
+					nomeLista +
+					'" não foi encontrada.'
+				);
+
+				return;
+			}
+
+			produtos = listasSalvas[nomeLista];
+
+			salvarProdutos();
+
+			atualizarLista();
+
+			alert(
+				'Lista "' +
+				nomeLista +
+				'" aberta com sucesso!'
+			);
 		}
 		
 		function exportarLista() {

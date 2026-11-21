@@ -366,6 +366,10 @@
 		}
 
         function excluirProduto(indice) {
+	
+			if (!confirm("Tem certeza?")) {
+				return;
+			}
 
             produtos.splice(indice, 1);
 

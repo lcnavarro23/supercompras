@@ -309,7 +309,7 @@
 		<button
 			class="btn-acao-lista"
 			onclick="excluirListaSalva()">
-			🗑️ Excluir Salva
+			🗑️ Excluir
 		</button>
 
 		<button
@@ -544,6 +544,56 @@
 				'Lista "' +
 				nomeLista +
 				'" aberta com sucesso!'
+			);
+		}
+		
+		function excluirListaSalva() {
+
+			let listasSalvas =
+				JSON.parse(
+					localStorage.getItem("listasSalvas")
+				) || {};
+
+			let nomesListas =
+				Object.keys(listasSalvas);
+
+			if (nomesListas.length === 0) {
+
+				alert("Nenhuma lista salva.");
+
+				return;
+			}
+
+			let mensagem =
+				"Listas salvas:\n\n";
+
+			nomesListas.forEach((nome, indice) => {
+
+				mensagem +=
+					(indice + 1) +
+					" - " +
+					nome +
+					"\n";
+
+			});
+
+			mensagem +=
+				"\nDigite o número da lista que deseja excluir:";
+
+			let opcao =
+				parseInt(prompt(mensagem));
+
+			if (
+				isNaN(opcao) ||
+				opcao < 1 ||
+				opcao > nomesListas.length
+			) {
+				return;
+			}
+
+			alert(
+				"Você escolheu: " +
+				nomesListas[opcao - 1]
 			);
 		}
 		

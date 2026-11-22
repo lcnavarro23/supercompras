@@ -631,9 +631,16 @@
 			let nomeArquivo =
 				"SuperCompras.json";
 
+			let arquivo =
+				new Blob(
+					[dadosExportacao],
+					{
+						type: "application/json"
+					}
+				);
+
 			alert(
-				"Arquivo: " +
-				nomeArquivo
+				"Arquivo preparado para exportação."
 			);
 			
 		}

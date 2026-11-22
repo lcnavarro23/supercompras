@@ -814,6 +814,48 @@
 					total.toFixed(2).replace(".", ",");
 
 				}
+				
+				document
+					.getElementById("arquivoImportacao")
+					.addEventListener(
+						"change",
+						function (evento) {
+
+							let arquivo =
+								evento.target.files[0];
+
+							if (!arquivo) {
+								return;
+							}
+
+							let leitor = new FileReader();
+
+							leitor.onload = function(e) {
+
+								alert(
+									"Conteúdo lido com sucesso!"
+								);
+
+							};
+
+							leitor.readAsText(arquivo);
+
+						}
+					);
+
+				document.addEventListener("DOMContentLoaded", () => {
+
+					if ("serviceWorker" in navigator) {
+						navigator.serviceWorker.register("sw.js")
+							.then(() => {
+								console.log("Service Worker registrado.");
+							})
+							.catch((erro) => {
+								console.log("Erro ao registrar SW:", erro);
+							});
+					}
+
+				});
 
 				document.addEventListener("DOMContentLoaded", () => {
 

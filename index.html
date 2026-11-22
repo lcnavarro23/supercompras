@@ -832,8 +832,13 @@
 
 							leitor.onload = function(e) {
 
+								produtos =
+									JSON.parse(
+										e.target.result
+									);
+
 								alert(
-									e.target.result
+									"Arquivo convertido com sucesso!"
 								);
 
 							};

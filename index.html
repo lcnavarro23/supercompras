@@ -319,7 +319,13 @@
 		</button>
 
 	</div>
-
+	
+	<input
+		type="file"
+		id="arquivoImportacao"
+		accept=".json"
+		style="display:none;">
+	
     <script>
 
         let produtos =
@@ -486,9 +492,11 @@
 
 				if (opcaoAbertura === "2") {
 
-					alert(
-						"Importação será implementada na próxima etapa."
-					);
+					document
+						.getElementById(
+							"arquivoImportacao"
+						)
+						.click();
 
 					return;
 				}

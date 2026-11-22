@@ -604,11 +604,18 @@
 				return;
 			}
 
-			alert(
-				'Lista "' +
-				nomeLista +
-				'" será excluída.'
-			);
+			delete listasSalvas[nomeLista];
+
+				localStorage.setItem(
+					"listasSalvas",
+					JSON.stringify(listasSalvas)
+				);
+
+				alert(
+					'Lista "' +
+					nomeLista +
+					'" excluída com sucesso!'
+				);
 
 		}
 		

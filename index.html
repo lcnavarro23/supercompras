@@ -621,10 +621,14 @@
 		
 		function exportarLista() {
 
-			alert(
-				"Produtos na lista: " +
-				produtos.length
-			);
+			let dadosExportacao =
+				JSON.stringify(
+					produtos,
+					null,
+					2
+				);
+
+			alert(dadosExportacao);
 
 		}
 		

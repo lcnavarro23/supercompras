@@ -591,10 +591,25 @@
 				return;
 			}
 
+			let nomeLista =
+				nomesListas[opcao - 1];
+
+			if (
+				!confirm(
+					'Excluir a lista "' +
+					nomeLista +
+					'"?'
+				)
+			) {
+				return;
+			}
+
 			alert(
-				"Você escolheu: " +
-				nomesListas[opcao - 1]
+				'Lista "' +
+				nomeLista +
+				'" será excluída.'
 			);
+
 		}
 		
 		function exportarLista() {

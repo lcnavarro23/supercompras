@@ -476,6 +476,22 @@
 		}
 
 		function abrirLista() {
+		
+			    let opcaoAbertura =
+					prompt(
+						"Como deseja abrir?\n\n" +
+						"1 - Lista salva\n" +
+						"2 - Arquivo importado"
+					);
+
+				if (opcaoAbertura === "2") {
+
+					alert(
+						"Importação será implementada na próxima etapa."
+					);
+
+					return;
+				}
 
 			let listasSalvas =
 				JSON.parse(

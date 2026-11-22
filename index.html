@@ -617,12 +617,9 @@
 
 			let nomeLista =
 				nomesListas[opcao - 1];
-
 			if (
 				!confirm(
-					'Excluir a lista "' +
-					nomeLista +
-					'"?'
+					"Tem certeza?"
 				)
 			) {
 				return;
@@ -633,12 +630,6 @@
 				localStorage.setItem(
 					"listasSalvas",
 					JSON.stringify(listasSalvas)
-				);
-
-				alert(
-					'Lista "' +
-					nomeLista +
-					'" excluída com sucesso!'
 				);
 
 		}
@@ -856,20 +847,6 @@
 							
 						}
 					);
-
-				document.addEventListener("DOMContentLoaded", () => {
-
-					if ("serviceWorker" in navigator) {
-						navigator.serviceWorker.register("sw.js")
-							.then(() => {
-								console.log("Service Worker registrado.");
-							})
-							.catch((erro) => {
-								console.log("Erro ao registrar SW:", erro);
-							});
-					}
-
-				});
 
 				document.addEventListener("DOMContentLoaded", () => {
 

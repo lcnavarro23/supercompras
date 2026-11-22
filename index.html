@@ -833,13 +833,13 @@
 							leitor.onload = function(e) {
 
 								alert(
-									"Conteúdo lido com sucesso!"
+									e.target.result
 								);
 
 							};
-
+							
 							leitor.readAsText(arquivo);
-
+							
 						}
 					);
 

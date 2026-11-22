@@ -639,9 +639,18 @@
 					}
 				);
 
-			alert(
-				"Arquivo preparado para exportação."
-			);
+			let url =
+				URL.createObjectURL(arquivo);
+
+			let link =
+				document.createElement("a");
+
+			link.href = url;
+
+			link.download =
+				nomeArquivo;
+
+			link.click();
 			
 		}
 		

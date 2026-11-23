@@ -676,6 +676,9 @@
 				navigator.share({
 					title: "SuperCompras",
 					files: [arquivoCompartilhar]
+				})
+				.catch(erro => {
+					alert("Erro: " + erro);
 				});
 
 			}

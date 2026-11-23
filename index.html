@@ -623,7 +623,10 @@
 
 			let dadosExportacao =
 				JSON.stringify(
-					produtos,
+					{
+						nomeLista: listaAtual,
+						produtos: produtos
+					},
 					null,
 					2
 				);

@@ -630,6 +630,16 @@
 
 			let nomeArquivo =
 				(listaAtual || "SuperCompras") + ".json";
+				
+			if (
+				!confirm(
+					'Exportar o arquivo "' +
+					nomeArquivo +
+					'"?'
+				)
+			) {
+				return;
+			}
 
 			let arquivo =
 				new Blob(

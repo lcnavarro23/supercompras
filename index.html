@@ -465,6 +465,9 @@
 				"listasSalvas",
 				JSON.stringify(listasSalvas)
 			);
+			
+			listaAtual = nomeLista;
+			
 			document.getElementById(
 				"nomeListaAtual"
 			).textContent =
@@ -535,6 +538,8 @@
 
 			let nomeLista =
 				nomesListas[opcao - 1];
+			
+			listaAtual = nomeLista;
 
 			produtos =
 				listasSalvas[nomeLista];

@@ -661,6 +661,15 @@
 				nomeArquivo;
 
 			link.click();
+
+			if (navigator.share) {
+
+				navigator.share({
+					title: "SuperCompras",
+					text: "Lista de compras: " + nomeArquivo
+				});
+
+			}
 			
 		}
 		

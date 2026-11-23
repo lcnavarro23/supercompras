@@ -838,6 +838,11 @@
 								produtos = dadosImportados.produtos;
 								
 								listaAtual = dadosImportados.nomeLista || "";
+								
+								document.getElementById(
+									"nomeListaAtual"
+								).textContent =
+									"📋 Lista Atual: " + listaAtual;
 
 								atualizarLista();
 								

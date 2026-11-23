@@ -330,7 +330,9 @@
 
         let produtos =
             JSON.parse(localStorage.getItem('produtos')) || [];
-
+			
+		let listaAtual = "";
+		
         atualizarLista();
 
         function salvarProdutos() {

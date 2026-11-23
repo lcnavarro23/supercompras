@@ -664,21 +664,9 @@
 
 			if (navigator.share) {
 
-				const arquivoCompartilhar =
-					new File(
-						[dadosExportacao],
-						nomeArquivo,
-						{
-							type: "application/json"
-						}
-					);
-
 				navigator.share({
 					title: "SuperCompras",
-					files: [arquivoCompartilhar]
-				})
-				.catch(erro => {
-					alert("Erro: " + erro);
+					text: "Lista de compras: " + nomeArquivo
 				});
 
 			}

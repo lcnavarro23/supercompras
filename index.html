@@ -354,7 +354,10 @@
 				.replace(",", ".");
 
 			let preco =
-				parseFloat(precoTexto);
+				precoTexto === ""
+					? 0
+					: parseFloat(precoTexto);
+
 
             let quantidade =
                 parseInt(
